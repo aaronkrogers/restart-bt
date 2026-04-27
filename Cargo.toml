@@ -1,0 +1,10 @@
+[package]
+name = "restart-bt"
+version = "0.1.1"
+edition = "2024"
+
+[dependencies]
+axum = "0.7"
+clap = { version = "4.6.1", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
