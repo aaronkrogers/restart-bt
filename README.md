@@ -118,7 +118,8 @@ ExecStart=/usr/local/bin/restart-bt --bind 0.0.0.0 --port 8989
 Environment=ALLOWED_TAGS="AA:BB:CC:DD:EE:FF,01:02:03:04:05"
 Restart=on-failure
 RestartSec=10
-User=http  # Or whichever user has sudo access to `systemctl restart bluetooth`
+# Run as a user having sudo access to call `systemctl restart bluetooth` without a password
+User=http
 
 [Install]
 WantedBy=multi-user.target
