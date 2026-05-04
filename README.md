@@ -110,6 +110,7 @@ To run `restart-bt` as a systemd service:
 ```ini
 [Unit]
 Description=Bluetooth Restart Service
+Requires=network.target
 After=network.target
 
 [Service]
