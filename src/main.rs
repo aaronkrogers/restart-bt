@@ -1,6 +1,6 @@
 use axum::{
     Form, Router,
-    extract::{DefaultBodyLimit, State},
+    extract::DefaultBodyLimit,
     http::StatusCode,
     routing::{get, post},
 };
@@ -25,9 +25,6 @@ struct Args {
     port: u16,
 }
 
-#[derive(Clone)]
-struct AppState;
-
 #[derive(Debug, Deserialize)]
 struct JobRequest {
     tagid: String,
@@ -47,8 +44,7 @@ async fn main() {
         .route(
             "/restart-bluetooth",
             post(restart_bluetooth).layer(DefaultBodyLimit::max(1024)),
-        )
-        .with_state(AppState);
+        );
 
     let addr = SocketAddr::from((
         args.bind.unwrap_or(Ipv4Addr::LOCALHOST),
@@ -64,7 +60,6 @@ async fn main() {
 }
 
 async fn restart_bluetooth(
-    State(_state): State<AppState>,
     Form(payload): Form<JobRequest>,
 ) -> Result<StatusCode, (StatusCode, String)> {
     let tagid = payload.tagid.to_ascii_uppercase();
