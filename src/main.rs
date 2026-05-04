@@ -43,7 +43,7 @@ async fn main() {
 
     let port = args.port;
     let app = Router::new()
-        .route("/version", get(version))
+        .route("/version", get(get_version))
         .route(
             "/restart-bluetooth",
             post(restart_bluetooth).layer(DefaultBodyLimit::max(1024)),
@@ -96,7 +96,7 @@ async fn restart_bluetooth(
     Ok(StatusCode::OK)
 }
 
-async fn version() -> (StatusCode, &'static str) {
+async fn get_version() -> (StatusCode, &'static str) {
     (StatusCode::OK, VERSION)
 }
 
